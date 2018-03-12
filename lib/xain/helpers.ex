@@ -19,15 +19,15 @@ defmodule Xain.Helpers do
   defp _id_and_class_shortcuts([h | t], attrs) do
     case h do
       "#" <> id -> 
-        id = String.strip(id)
+        id = String.trim(id)
         _id_and_class_shortcuts(t, merge_id_or_class(:id, id, attrs))
         
       "." <> class -> 
-        class = String.strip(class)
+        class = String.trim(class)
         _id_and_class_shortcuts(t, merge_id_or_class(:class, class, attrs))
 
       # "%" <> name -> 
-      #   name = String.strip(name)
+      #   name = String.trim(name)
       #   _id_and_class_shortcuts(t, struct(tag, name: String.to_atom(name)))
 
       contents -> 

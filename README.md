@@ -59,11 +59,6 @@ Will Render:
 
 i.e. Phoenix raw
 
-Add the following to your project's config file
-
-```Elixir
-config :xain, :after_callback, {Phoenix.HTML, :raw}
-```
 
 ```Elixir
   markup safe: true do

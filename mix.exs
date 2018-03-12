@@ -7,7 +7,7 @@ defmodule Xain.Mixfile do
     [app: :xain,
      version: @version,
      elixir: "~> 1.0",
-     package: package,
+     package: package(),
      deps: [],
      description: """
      An html DSL package.

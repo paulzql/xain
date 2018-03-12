@@ -123,7 +123,7 @@ defmodule Xain do
   defp merge_attrs(content, attrs, tag_name) do
     attrs = attrs |> set_defaults(tag_name)
     {content, attrs} = id_and_class_shortcuts(content, attrs)
-    attrs_html = for {key, val} <- attrs, into: "", do: " #{key}=#{quote_symbol}#{val}#{quote_symbol}"
+    attrs_html = for {key, val} <- attrs, into: "", do: " #{key}=#{quote_symbol()}#{val}#{quote_symbol()}"
     {content, attrs_html}
   end
 
@@ -166,15 +166,10 @@ defmodule Xain do
           Logger.error inspect(System.stacktrace)
           reraise exception, System.stacktrace
       end
-      if opts[:safe] do
-        case Application.get_env :xain, :after_callback do
-          nil ->
-            result
-          {mod, fun} ->
-            apply mod, fun, [result]
-        end
-      else
-        result
+      case opts[:safe] do
+        true when is_nil(result) -> {:safe, ""}
+        true when is_binary(result) or is_list(result) -> {:safe, result}
+        false -> result
       end
     end
   end
@@ -200,4 +195,5 @@ defmodule Xain do
   defp set_defaults(attrs, name) do
     Keyword.merge(get_defaults(name), attrs)
   end
+
 end
