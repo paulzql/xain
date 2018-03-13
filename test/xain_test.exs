@@ -227,7 +227,7 @@ defmodule XainTest do
       result = markup :nested do
         div ".second"
       end
-      assert result == ~s(<div class="second"></div>)
+      assert result == {:safe, ~s(<div class="second"></div>)}
     end
   end
   test "supports nested markups with tags" do
@@ -236,7 +236,7 @@ defmodule XainTest do
       result = markup :nested do
         div ".second"
       end
-      assert result == ~s(<div class="second"></div>)
+      assert result == {:safe, ~s(<div class="second"></div>)}
       span
     end
     assert result2 == ~s(<div class="first"></div><span></span>)
@@ -248,7 +248,7 @@ defmodule XainTest do
         result = markup :nested do
           div ".second"
         end
-        assert result == ~s(<div class="second"></div>)
+        assert result == {:safe, ~s(<div class="second"></div>)}
         span
       end
     end

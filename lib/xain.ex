@@ -169,7 +169,7 @@ defmodule Xain do
       case opts[:safe] do
         true when is_nil(result) -> {:safe, ""}
         true when is_binary(result) or is_list(result) -> {:safe, result}
-        false -> result
+        _ -> result
       end
     end
   end

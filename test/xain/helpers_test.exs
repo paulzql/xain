@@ -58,7 +58,7 @@ defmodule Xain.HelpersTest do
 
   test "ensure_valid_contents raises error if String.Chars is not implemented for the first argument" do
     assert capture_log(fn ->
-      assert_raise Protocol.UndefinedError, "protocol String.Chars not implemented for %{}", fn ->
+      assert_raise Protocol.UndefinedError, fn ->
         ensure_valid_contents(%{}, :p)
       end
     end) =~ @log_msg
